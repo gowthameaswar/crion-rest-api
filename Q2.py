@@ -1,12 +1,20 @@
-n = int(input("Enter a positive integer: "))
-digits = list(str(n))
+def chng(result):
+    num = 0
+    for ch in result:
+        if ch == '0':
+            num *= 10
+        else:
+            num = (num * 10) + 1
+    return num
 
-summands = []
-for i, digit in enumerate(digits):
-    if digit == "0":
-        continue
-    num_zeros = len(digits) - i - 1
-    summands.append("1" + "0" * num_zeros)
+def solve(n):
+    result = []
+    while n > 0:
+        max_num = chng(str(n))
+        n -= max_num
+        result.append(max_num)
+    result.sort(reverse=True)
+    print('+'.join(map(str, result)))
+n = int(input())
+result = solve(n)
 
-min_sum_str = "+".join(summands)
-print(min_sum_str)
